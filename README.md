@@ -16,7 +16,7 @@ $ make scp
 $ make ssh
 
 # The default user is "vagrant"
-vagrant@ubuntu-focal:/tmp$ whoami
+vagrant@ubuntu-focal:$ whoami
 vagrant
 
 # execute exploit
